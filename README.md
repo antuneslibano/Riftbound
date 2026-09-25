@@ -20,7 +20,8 @@ O núcleo do jogo: **controle territorial de 3 Rifts numa rede dinâmica, Rift B
 - Dependências: somente pacotes oficiais da Unity (`com.unity.inputsystem`, `com.unity.ugui` + módulos built-in).
   Nenhum asset externo e nenhum serviço online.
 - Input: `Controls/RiftInput.cs` usa o **Input System** (pacote novo) quando ele está instalado e ativo, e cai
-  automaticamente para o **Input Manager legado** se não estiver. O projeto vem com `Active Input Handling = Both`.
+  automaticamente para o **Input Manager legado** se não estiver. O projeto vem com `Active Input Handling = Input System Package (New)`
+  (menu *Riftbound > Fix Deprecation Warnings* reaplica isso e desliga o Dynamic Batching).
   Os scripts ficam nos assembly definitions `Riftbound.Runtime` / `Riftbound.Editor`, que detectam o pacote
   (define `RIFTBOUND_INPUT_SYSTEM`).
 - Para Android, instale pelo Unity Hub os módulos **Android Build Support**, **OpenJDK** e **Android SDK & NDK Tools**.

@@ -42,6 +42,54 @@ namespace Riftbound.EditorTools
             Debug.LogError("[Riftbound] No usable input backend. Install the Input System package (Window > Package Manager) " +
                            "and set Project Settings > Player > Active Input Handling to 'Input System Package (New)' or 'Both'.");
 #endif
+
+            FixDeprecatedSettings();
+        }
+
+        /// <summary>
+        /// Removes the two deprecation warnings of recent Unity 6 versions:
+        /// "Input Manager is marked for deprecation" (switch to the Input System package only) and
+        /// "Dynamic Batching is deprecated" (turn it off for every platform; the prototype doesn't need it).
+        /// </summary>
+        [MenuItem("Riftbound/Fix Deprecation Warnings", priority = 42)]
+        static void FixDeprecatedSettings()
+        {
+            var assets = Resources.FindObjectsOfTypeAll<PlayerSettings>();
+            if (assets == null || assets.Length == 0) return;
+            var so = new SerializedObject(assets[0]);
+            bool changed = false;
+
+#if RIFTBOUND_INPUT_SYSTEM
+            // 0 = Input Manager (old), 1 = Input System Package (new), 2 = Both.
+            var input = so.FindProperty("activeInputHandler");
+            if (input != null && input.intValue != 1)
+            {
+                input.intValue = 1;
+                changed = true;
+                Debug.LogWarning("[Riftbound] Active Input Handling set to 'Input System Package (New)'. Restart the Editor to apply.");
+            }
+#endif
+
+            var batching = so.FindProperty("m_BuildTargetBatching");
+            if (batching != null && batching.isArray)
+            {
+                for (int i = 0; i < batching.arraySize; i++)
+                {
+                    var dyn = batching.GetArrayElementAtIndex(i).FindPropertyRelative("m_DynamicBatching");
+                    if (dyn != null && dyn.boolValue)
+                    {
+                        dyn.boolValue = false;
+                        changed = true;
+                    }
+                }
+            }
+
+            if (changed)
+            {
+                so.ApplyModifiedPropertiesWithoutUndo();
+                AssetDatabase.SaveAssets();
+                Debug.Log("[Riftbound] Deprecated project settings updated (Input System only, Dynamic Batching off).");
+            }
         }
     }
 }

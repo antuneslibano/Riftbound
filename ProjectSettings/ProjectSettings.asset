@@ -36,4 +36,11 @@ PlayerSettings:
     Standalone: com.riftbound.prototype
   scriptingBackend:
     Android: 1
-  activeInputHandler: 2
+  activeInputHandler: 1
+  m_BuildTargetBatching:
+  - m_BuildTarget: Standalone
+    m_StaticBatching: 1
+    m_DynamicBatching: 0
+  - m_BuildTarget: Android
+    m_StaticBatching: 1
+    m_DynamicBatching: 0
