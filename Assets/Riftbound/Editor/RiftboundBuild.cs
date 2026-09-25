@@ -41,11 +41,12 @@ namespace Riftbound.EditorTools
             PlayerSettings.allowedAutorotateToLandscapeLeft = false;
             PlayerSettings.allowedAutorotateToLandscapeRight = false;
 
-            // Android 7.0+ (API 24), latest installed target SDK, 64-bit + 32-bit ARM with IL2CPP
-            // (64-bit is mandatory on many recent phones, which is why Mono/ARMv7-only is not used).
-            PlayerSettings.Android.minSdkVersion = (AndroidSdkVersions)24;
+            // At least Android 7.0 (API 24); newer Unity versions may already require a higher minimum, keep that.
+            // 64-bit ARM with IL2CPP: required by recent phones and supported by every Unity 6 release.
+            if ((int)PlayerSettings.Android.minSdkVersion < 24)
+                PlayerSettings.Android.minSdkVersion = (AndroidSdkVersions)24;
             PlayerSettings.Android.targetSdkVersion = AndroidSdkVersions.AndroidApiLevelAuto;
-            PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARM64 | AndroidArchitecture.ARMv7;
+            PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARM64;
 #if UNITY_2021_2_OR_NEWER
             PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Android, PackageId);
             PlayerSettings.SetScriptingBackend(NamedBuildTarget.Android, ScriptingImplementation.IL2CPP);

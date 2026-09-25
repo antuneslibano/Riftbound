@@ -27,14 +27,13 @@ PlayerSettings:
   androidBlitType: 0
   bundleVersion: 0.1.0
   AndroidBundleVersionCode: 1
-  AndroidMinSdkVersion: 24
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
-  AndroidTargetArchitectures: 3
+  AndroidTargetArchitectures: 2
   AndroidSplitApplicationBinary: 0
   applicationIdentifier:
     Android: com.riftbound.prototype
     Standalone: com.riftbound.prototype
   scriptingBackend:
     Android: 1
-  activeInputHandler: 0
+  activeInputHandler: 2

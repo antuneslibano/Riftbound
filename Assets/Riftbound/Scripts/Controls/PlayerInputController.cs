@@ -13,7 +13,7 @@ namespace Riftbound.Controls
     /// Touch and mouse behave the same: press shows a preview (green = valid, red = invalid),
     /// dragging moves it, releasing plays the card. Presses that start on UI are ignored.
     /// Produces <see cref="PlayCardCommand"/>s exactly like the bot.
-    /// Uses the legacy Input Manager (Project Settings > Player > Active Input Handling = Input Manager or Both).
+    /// Reads the pointer through <see cref="RiftInput"/> (Input System package or legacy Input Manager).
     /// </summary>
     public class PlayerInputController
     {
@@ -71,8 +71,10 @@ namespace Riftbound.Controls
 
             view.ShowDeployZones(team, card.kind == CardKind.Unit);
 
-#if ENABLE_LEGACY_INPUT_MANAGER
-            ReadPointer(out bool down, out bool held, out bool up, out Vector2 screen, out bool overUi, out bool hover);
+            var ptr = RiftInput.ReadPointer();
+            bool down = ptr.Down, held = ptr.Held, up = ptr.Up, hover = ptr.Hover;
+            Vector2 screen = ptr.Screen;
+            bool overUi = (down || hover) && IsOverUi(screen);
 
             if (down)
             {
@@ -96,7 +98,6 @@ namespace Riftbound.Controls
                 if (cam.pixelRect.Contains(screen)) TryPlay(lastWorld);
                 else view.HideGhost();
             }
-#endif
         }
 
         void TryPlay(Vector2 world)
@@ -162,29 +163,5 @@ static readonly List<RaycastResult> raycastBuffer = new List<RaycastResult>();
             return raycastBuffer.Count > 0;
         }
 
-#if ENABLE_LEGACY_INPUT_MANAGER
-        static void ReadPointer(out bool down, out bool held, out bool up, out Vector2 screen, out bool overUi, out bool hover)
-        {
-            if (UnityEngine.Input.touchCount > 0)
-            {
-                var t = UnityEngine.Input.GetTouch(0);
-                screen = t.position;
-                down = t.phase == TouchPhase.Began;
-                up = t.phase == TouchPhase.Ended || t.phase == TouchPhase.Canceled;
-                held = !down && !up;
-                overUi = down && IsOverUi(screen);
-                hover = false;
-                return;
-            }
-
-            screen = UnityEngine.Input.mousePosition;
-            down = UnityEngine.Input.GetMouseButtonDown(0);
-            up = UnityEngine.Input.GetMouseButtonUp(0);
-            held = UnityEngine.Input.GetMouseButton(0);
-            // Mouse hover preview is an Editor/desktop convenience only; touch never relies on it.
-            hover = !held && !up && !UnityEngine.Input.touchSupported;
-            overUi = (down || hover) && IsOverUi(screen);
-        }
-#endif
     }
 }

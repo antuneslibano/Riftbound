@@ -14,13 +14,15 @@ O núcleo do jogo: **controle territorial de 3 Rifts numa rede dinâmica, Rift B
 
 ## 1. Versão da Unity
 
-- **Unity 6 LTS (6000.0.x)**. O `ProjectSettings/ProjectVersion.txt` fixa `6000.0.47f1`, mas qualquer 6000.0.x
-  (ou mais nova) serve. Se o Hub avisar sobre a versão, escolha a sua 6000.x instalada.
+- **Unity 6000.5.0f1** (fixada em `ProjectSettings/ProjectVersion.txt`). O código também compila em qualquer
+  Unity 6 (6000.0+). Se o Hub avisar sobre a versão, escolha a sua 6000.x instalada.
 - Pipeline de render: **Built-in** (sem URP/HDRP).
-- Dependências: somente pacotes nativos (`com.unity.ugui` + módulos built-in). Nenhum asset externo e nenhum serviço online.
-- Input: **Input Manager (legado)**, já configurado em `ProjectSettings` (`Active Input Handling = Input Manager`).
-  Se estiver como "Input System Package (New)", o menu *Riftbound > Validate Project Setup* troca para "Both".
-  Depois disso, reinicie o Editor.
+- Dependências: somente pacotes oficiais da Unity (`com.unity.inputsystem`, `com.unity.ugui` + módulos built-in).
+  Nenhum asset externo e nenhum serviço online.
+- Input: `Controls/RiftInput.cs` usa o **Input System** (pacote novo) quando ele está instalado e ativo, e cai
+  automaticamente para o **Input Manager legado** se não estiver. O projeto vem com `Active Input Handling = Both`.
+  Os scripts ficam nos assembly definitions `Riftbound.Runtime` / `Riftbound.Editor`, que detectam o pacote
+  (define `RIFTBOUND_INPUT_SYSTEM`).
 - Para Android, instale pelo Unity Hub os módulos **Android Build Support**, **OpenJDK** e **Android SDK & NDK Tools**.
 
 ## 2. Como abrir e jogar
@@ -139,7 +141,7 @@ Habilidades passivas de unidade ficam em `UnitStats` + `UnitBrain` (decisão), `
 
 ## 8. Build Android
 
-Pré-requisitos: Unity 6 com **Android Build Support + OpenJDK + Android SDK & NDK Tools** (Unity Hub > Installs >
+Pré-requisitos: Unity 6000.5 (ou outra Unity 6) com **Android Build Support + OpenJDK + Android SDK & NDK Tools** (Unity Hub > Installs >
 engrenagem > Add modules).
 
 **Pelo Editor:** menu **Riftbound > Build Android APK**.
@@ -155,7 +157,8 @@ O script aplica, antes de compilar:
 
 - `com.riftbound.prototype`, versão 0.1.0 (code 1);
 - orientação **Portrait** fixa;
-- **IL2CPP**, **ARM64 + ARMv7**; min SDK **24 (Android 7.0)**, target SDK = maior instalado;
+- **IL2CPP**, **ARM64**; min SDK **24 (Android 7.0)** ou o mínimo exigido pela sua Unity, se for maior;
+  target SDK = maior instalado;
 - APK (não AAB); cena `Main.unity` nas Build Settings.
 
 Instalar: `adb install -r Builds/Android/RiftboundPrototype.apk`, ou copie o arquivo para o celular e abra
@@ -173,6 +176,8 @@ Instalar: `adb install -r Builds/Android/RiftboundPrototype.apk`, ou copie o arq
 - Visual 100% placeholder: textos em `TextMesh` com a fonte embutida da Unity, que pode ficar levemente borrada.
 - Sem áudio, sem animações, sem física (movimento e separação simples, sem obstáculos).
 - O bot é baseado em regras: não prevê o futuro e não faz combos elaborados.
-- Só um dedo é usado no touch (multi-touch desligado de propósito).
+- Só um dedo é usado no touch (o primeiro toque).
+- O caminho do Input System foi checado contra um stub escrito com as assinaturas da API; o pacote real não estava
+  disponível no ambiente de desenvolvimento.
 - O Debug Mode cobre parte do campo (é uma ferramenta, não UI final).
 - A regra de empate "Sudden Rift" tem limite de 60 s; depois disso vence quem tiver mais Rifts, senão é empate.

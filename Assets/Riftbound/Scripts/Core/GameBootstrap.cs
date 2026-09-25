@@ -67,9 +67,7 @@ namespace Riftbound
             QualitySettings.vSyncCount = 0;
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
             Screen.orientation = ScreenOrientation.Portrait;
-#if ENABLE_LEGACY_INPUT_MANAGER
-            UnityEngine.Input.multiTouchEnabled = false;
-#endif
+            RiftInput.Configure();
 
             if (config == null) config = GameConfig.LoadOrDefault();
             difficulty = (BotDifficulty)Mathf.Clamp(PlayerPrefs.GetInt(DifficultyPrefKey, (int)config.defaultBotDifficulty), 0, 2);
@@ -117,7 +115,7 @@ namespace Riftbound
             if (EventSystem.current != null) return;
             var go = new GameObject("EventSystem");
             go.AddComponent<EventSystem>();
-            go.AddComponent<StandaloneInputModule>();
+            RiftInput.AddUiInputModule(go);
             DontDestroyOnLoad(go);
         }
 
@@ -172,17 +170,17 @@ namespace Riftbound
 
         void HandleHotkeys()
         {
-#if ENABLE_LEGACY_INPUT_MANAGER
-            if (UnityEngine.Input.GetKeyDown(KeyCode.F1) || UnityEngine.Input.GetKeyDown(KeyCode.BackQuote)) ToggleDebug();
-            if (UnityEngine.Input.GetKeyDown(KeyCode.Space)) TogglePause();
-            if (UnityEngine.Input.GetKeyDown(KeyCode.R) && match != null && !match.IsRunning) Restart();
+            if (RiftInput.KeyDown(Hotkey.ToggleDebug)) ToggleDebug();
+            if (RiftInput.KeyDown(Hotkey.Pause)) TogglePause();
+            if (RiftInput.KeyDown(Hotkey.Restart) && match != null && !match.IsRunning) Restart();
             if (input != null)
             {
-                for (int i = 0; i < 4; i++)
-                    if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha1 + i)) input.SelectSlot(i);
-                if (UnityEngine.Input.GetKeyDown(KeyCode.Escape)) input.Deselect();
+                if (RiftInput.KeyDown(Hotkey.Card1)) input.SelectSlot(0);
+                if (RiftInput.KeyDown(Hotkey.Card2)) input.SelectSlot(1);
+                if (RiftInput.KeyDown(Hotkey.Card3)) input.SelectSlot(2);
+                if (RiftInput.KeyDown(Hotkey.Card4)) input.SelectSlot(3);
+                if (RiftInput.KeyDown(Hotkey.Cancel)) input.Deselect();
             }
-#endif
         }
 
         // ------------------------------------------------------------------ session actions
