@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!129 &1
+PlayerSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 26
+  productGUID: 2866b78e460a4beaa67ed43a9866eaad
+  AndroidProfiler: 0
+  defaultScreenOrientation: 0
+  targetDevice: 2
+  companyName: Riftbound Prototype
+  productName: Riftbound Prototype
+  defaultCursor: {fileID: 0}
+  cursorHotspot: {x: 0, y: 0}
+  m_SplashScreenBackgroundColor: {r: 0.08, g: 0.09, b: 0.11, a: 1}
+  m_ShowUnitySplashScreen: 1
+  m_ShowUnitySplashLogo: 1
+  runInBackground: 1
+  allowedAutorotateToPortrait: 1
+  allowedAutorotateToPortraitUpsideDown: 0
+  allowedAutorotateToLandscapeRight: 0
+  allowedAutorotateToLandscapeLeft: 0
+  useOSAutorotation: 1
+  use32BitDisplayBuffer: 1
+  androidStartInFullscreen: 1
+  androidRenderOutsideSafeArea: 1
+  androidBlitType: 0
+  bundleVersion: 0.1.0
+  AndroidBundleVersionCode: 1
+  AndroidMinSdkVersion: 24
+  AndroidTargetSdkVersion: 0
+  AndroidPreferredInstallLocation: 1
+  AndroidTargetArchitectures: 3
+  AndroidSplitApplicationBinary: 0
+  applicationIdentifier:
+    Android: com.riftbound.prototype
+    Standalone: com.riftbound.prototype
+  scriptingBackend:
+    Android: 1
+  activeInputHandler: 0

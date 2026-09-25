@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 564a3d6b7f684023ad2e16363ce6a34e, type: 3}
+  m_Name: Parasite
+  m_EditorClassIdentifier: 
+  cardId: "PARASITE"
+  displayName: "PARASITE"
+  fluxCost: 3
+  kind: 2
+  description: "Spell. Tap an enemy unit: after 10s it takes heavy damage. If it dies, 2 Spawnlings join you."
+  unit:
+    maxHp: 300
+    riftDamageReduction: 0
+    attackDamage: 30
+    attackInterval: 1
+    attackRange: 0.5
+    sightRange: 2.6
+    coreDamage: 2
+    prioritizeUnits: 0
+    moveSpeed: 1.5
+    fluxDrainPerSecond: 0
+    holdsRifts: 0
+    shape: 0
+    bodyRadius: 0.3
+  spawnCount: 1
+  spawnSpread: 0.35
+  pulseDamage: 260
+  pulseRadius: 1.7
+  parasiteDelay: 10
+  parasiteDamage: 700
+  parasiteSpawnCard: {fileID: 11400000, guid: 8d6d60a69fbf4baeb16d3fd6ecc147c7, type: 2}
+  parasiteSpawnCount: 2
+  targetPickRadius: 0.9

@@ -1,0 +1,34 @@
+# Unity generated
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
+/*.csproj
+/*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+.vs/
+.idea/
+.vscode/
+*.apk.symbols.zip
+/Builds/**/*_BurstDebugInformation_DoNotShip/
+/Builds/**/*_BackUpThisFolder_ButDontShipItWithYourGame/
+
+# Headless balance simulator build output
+/Tools/**/bin/
+/Tools/**/obj/
+
+# OS
+.DS_Store
+Thumbs.db

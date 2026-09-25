@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb04fca2765041879c96868dddec139e, type: 3}
+  m_Name: RiftboundConfig
+  m_EditorClassIdentifier: 
+  deck:
+  - {fileID: 11400000, guid: 4c96d7d689134611a372c63308adce68, type: 2}
+  - {fileID: 11400000, guid: 064aa5ead1164bf4b62e696bf0ab410b, type: 2}
+  - {fileID: 11400000, guid: 7f5eb1c734a5452d9eb0fced03a29fbd, type: 2}
+  - {fileID: 11400000, guid: c805b84fdea44258befe13ddcea5589f, type: 2}
+  - {fileID: 11400000, guid: 419c3910c4c54399944208bb126402bd, type: 2}
+  - {fileID: 11400000, guid: 6e59b2355efc478d9efe11fed780d550, type: 2}
+  - {fileID: 11400000, guid: 7342835891874d08b1f30652bbcfdb13, type: 2}
+  - {fileID: 11400000, guid: f5ab97585d4449c4ab470c3987309432, type: 2}
