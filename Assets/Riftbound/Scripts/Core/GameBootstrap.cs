@@ -54,7 +54,7 @@ namespace Riftbound
         {
             if (SceneManager.GetActiveScene().name != "Main") return;
 #if UNITY_2023_1_OR_NEWER
-            if (FindFirstObjectByType<GameBootstrap>() != null) return;
+            if (FindAnyObjectByType<GameBootstrap>() != null) return;
 #else
             if (FindObjectOfType<GameBootstrap>() != null) return;
 #endif
